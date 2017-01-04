@@ -50,22 +50,17 @@ public class AppWindow {
 			}
         });
 		
-		JButton btnOther = new JButton("Do Something");
-		btnOther.setToolTipText("Do Something");
-		btnOther.setPreferredSize(new java.awt.Dimension(150, 30));
-		btnOther.setMaximumSize(new java.awt.Dimension(150, 30));
-		btnOther.setMargin(new java.awt.Insets(2, 2, 2, 2));
-		btnOther.setMinimumSize(new java.awt.Dimension(150, 30));
-		btnOther.addActionListener(new java.awt.event.ActionListener() {
+		JButton btnDialog = new JButton("Show Dialog"); //Create Quit button
+        btnDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	System.out.println("Do Something");
-            	
+            	AppSummary as =  new AppSummary(frame, true);
+            	as.show();
 			}
         });
 		
         top.add(txtFileName);
         top.add(btnChooseFile);
-        top.add(btnOther);
+        top.add(btnDialog);
         frame.getContentPane().add(top); //Add the panel to the window
         
         
@@ -82,13 +77,7 @@ public class AppWindow {
         bottom.setMaximumSize(new java.awt.Dimension(500, 50));
         bottom.setMinimumSize(new java.awt.Dimension(500, 50));
         
-        JButton btnDialog = new JButton("Show Dialog"); //Create Quit button
-        btnDialog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-            	AppSummary as =  new AppSummary(frame, true);
-            	as.show();
-			}
-        });
+        
         
         JButton btnQuit = new JButton("Quit"); //Create Quit button
         btnQuit.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +85,7 @@ public class AppWindow {
             	System.exit(0);
 			}
         });
-        bottom.add(btnDialog);
+        
         bottom.add(btnQuit);
 
         frame.getContentPane().add(bottom);       
