@@ -19,15 +19,31 @@ public static Map<Class, Set<Class>> graph = new HashMap();
 public static void getJar(){
 	 JarInputStream in;
 		try {			
-			in = new JarInputStream(new FileInputStream(new File("src/string-service.jar")));
+			File file  = new File("src/string-service.jar");
+		
+			 URL url = file.toURI().toURL();
+	         URL[] urls = new URL[]{url};
+	            
+	         ClassLoader cl = new URLClassLoader(urls);
+	         
+	     	in = new JarInputStream(new FileInputStream(new File("src/string-service.jar")));
 			JarEntry next = in.getNextJarEntry();
 			while (next != null) {
 			 if (next.getName().endsWith(".class")) {
 			 String name = next.getName().replaceAll("/", "\\.");
 			 name = name.replaceAll(".class", "");
 			 if (!name.contains("$")) name.substring(0, name.length() - ".class".length());
-					// System.out.println(name);
-					 getClassName(next, name);
+					
+			// inspect class
+			 	
+				try {
+					Class cls = Class.forName(name, false, cl);
+					System.out.println(name);
+					//getClassName(cls);
+				} catch (ClassNotFoundException e) {
+					System.out.println("Couldn't find class '" + name + "'"); 
+				} // reflection
+			 
 			 }
 			 next = in.getNextJarEntry();
 			}
@@ -37,19 +53,6 @@ public static void getJar(){
 		}
 }
 
- public static void getClassName(JarEntry next, String name){
-	 
-	 Class[] interfaces;
-	 try {
-		Class cls = Class.forName(name);
-		if(cls.isInterface()){
-			interfaces=cls.getInterfaces();
-			//graph.put(next, interfaces);
-		}
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
- }
+ 
 
 }
