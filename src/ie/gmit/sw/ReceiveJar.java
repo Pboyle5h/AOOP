@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
@@ -15,8 +17,11 @@ import java.util.jar.JarInputStream;
 
 public class ReceiveJar {
 
-public static Map<Class, Set<Class>> graph = new HashMap();
+//public static Map<Class, Set<Class>> graph = new HashMap();
+public static HashMap<String, metric> Metrics = new HashMap<>();
+
 public static void getJar(){
+	
 	 JarInputStream in;
 		try {			
 			File file  = new File("src/string-service.jar");
@@ -38,8 +43,10 @@ public static void getJar(){
 			 	
 				try {
 					Class cls = Class.forName(name, false, cl);
-					System.out.println(name);
-					//getClassName(cls);
+					//System.out.println(name);
+					//Metrics.put(name, new metric());
+					//System.out.println(Metrics);
+					getClassDetails(cls);
 				} catch (ClassNotFoundException e) {
 					System.out.println("Couldn't find class '" + name + "'"); 
 				} // reflection
@@ -51,6 +58,11 @@ public static void getJar(){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+}
+
+public static void getClassDetails(Class cls){
+	 Package pack = cls.getPackage(); //Get the package
+     System.out.println("Package Name: " + pack.getName());
 }
 
  
