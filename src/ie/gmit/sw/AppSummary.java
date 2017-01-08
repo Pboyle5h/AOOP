@@ -60,6 +60,7 @@ public class AppSummary extends JDialog{
 		tableScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		tablePanel.add(tableScroller, FlowLayout.LEFT);
+		TypeSummaryTableModel.getMetricData();
 	}
 	
 	private void configureButtonPanel(){

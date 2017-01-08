@@ -17,11 +17,11 @@ import java.util.jar.JarInputStream;
 
 public class ReceiveJar {
 
-//public static Map<Class, Set<Class>> graph = new HashMap();
+
 public static HashMap<String, metric> Metrics = new HashMap<>();
 
 public static void getJar(){
-	
+	metric m = new metric();
 	 JarInputStream in;
 		try {			
 			File file  = new File("src/string-service.jar");
@@ -39,17 +39,16 @@ public static void getJar(){
 			 name = name.replaceAll(".class", "");
 			 if (!name.contains("$")) name.substring(0, name.length() - ".class".length());
 					
-			// inspect class
-			 	
+			
 				try {
 					Class cls = Class.forName(name, false, cl);
-					//System.out.println(name);
-					//Metrics.put(name, new metric());
-					//System.out.println(Metrics);
+					Metrics.put(name, m);
+					m.setName(name);
+					System.out.println(Metrics);
 					getClassDetails(cls);
 				} catch (ClassNotFoundException e) {
-					System.out.println("Couldn't find class '" + name + "'"); 
-				} // reflection
+					System.out.println("Couldn't find class "); 
+				} 
 			 
 			 }
 			 next = in.getNextJarEntry();
@@ -64,6 +63,8 @@ public static void getClassDetails(Class cls){
 	 Package pack = cls.getPackage(); //Get the package
      System.out.println("Package Name: " + pack.getName());
 }
+
+
 
  
 

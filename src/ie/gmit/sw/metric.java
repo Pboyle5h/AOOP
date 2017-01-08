@@ -3,7 +3,14 @@ package ie.gmit.sw;
 public class metric {
 	private int inDegree;
     private int outDegree;
+    private String name;
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getInDegree() {
 		return inDegree;
 	}
