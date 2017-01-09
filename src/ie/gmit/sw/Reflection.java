@@ -9,13 +9,15 @@ public class Reflection {
 	public Reflection(Class cls){
 	      super();
 	      this.cls = cls;
-	      getMethods();
-	      getFields() ;
+	      //getMethods();
+	      //getFields() ;
+	      //getConstructors();
+	      getInterfaces();
 
 	   }	 
 	
 	public void getMethods() {
-		Method[] methods = cls.getMethods(); 
+		Method[] methods = cls.getDeclaredMethods(); 
 		Class[] methodParams;
 
 		
@@ -36,7 +38,7 @@ public class Reflection {
 	
 	
 	public void getFields() {
-		Field[] fields = cls.getFields(); //Get the fields / attributes
+		Field[] fields = cls.getDeclaredFields(); //Get the fields / attributes
 		//Loop over the Fields and print the name of each
 		for(Field f : fields){
 			 System.out.println("Field Name = " + f.getName());
@@ -45,4 +47,38 @@ public class Reflection {
 	         System.out.println("Modifiers = " + Modifier.toString(mod));
 		}
 	}
+	
+	public void getInterfaces(){
+	 boolean iface=false;	
+	 if(iface = cls.isInterface()){ 
+
+     Class[] interfaces = cls.getInterfaces(); 
+     	for(Class i : interfaces){
+             System.out.println("Interfaces: " + i.getName());       
+
+     	}
+     
+	 
+	 }
+	}
+	 public void getConstructors(){
+	      Constructor cons[] = cls.getConstructors();
+	      
+	      for (Constructor c : cons) {
+	         System.out.println("Constructor  = " + c.getName());
+	         Class[] Params = c.getParameterTypes();
+	    
+	         for (Class p : Params){
+	            System.out.println("Params "+ p.getName());
+	         }
+
+	         
+	      }
+	   }
+
+	 public void getPackage(){
+		 Package pack = cls.getPackage(); 
+	     System.out.println("Package Name: " + pack.getName());
+	}
+
 }

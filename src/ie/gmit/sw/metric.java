@@ -24,5 +24,6 @@ public class metric {
 		this.outDegree = outDegree;
 	}
 	
+	
     
 }

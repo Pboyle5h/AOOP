@@ -45,7 +45,7 @@ public static void getJar(){
 					Metrics.put(name, m);
 					m.setName(name);
 					//System.out.println(Metrics);
-					getClassDetails(cls);
+					
 					Reflection ref = new Reflection(cls);
 				
 				} catch (ClassNotFoundException e) {
@@ -61,10 +61,6 @@ public static void getJar(){
 		}
 }
 
-public static void getClassDetails(Class cls){
-	 Package pack = cls.getPackage(); //Get the package
-     System.out.println("Package Name: " + pack.getName());
-}
 
 
 
