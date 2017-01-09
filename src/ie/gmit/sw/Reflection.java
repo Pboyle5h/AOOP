@@ -1,20 +1,21 @@
 package ie.gmit.sw;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 
 public class Reflection {
-	private Class c;
+	private Class cls;
 	ReceiveJar rj = new ReceiveJar();
 	int outDegree, inDegree= 0;
-	public Reflection(Class c){
+	public Reflection(Class cls){
 	      super();
-	      this.c = c;
+	      this.cls = cls;
 	      getMethods();
+	      getFields() ;
 
 	   }	 
 	
 	public void getMethods() {
-		Method[] methods = c.getMethods(); 
+		Method[] methods = cls.getMethods(); 
 		Class[] methodParams;
 
 		
@@ -32,5 +33,13 @@ public class Reflection {
 			}
 		}
 	}
+	
+	public void getFields() {
+		Field[] fields = cls.getFields(); //Get the fields / attributes
+		//Loop over the Fields and print the name of each
+		for(Field f : fields){
 
+			System.out.println("Field Name: " + f.getName());
+		}
+	}
 }
