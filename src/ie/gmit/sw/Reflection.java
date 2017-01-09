@@ -34,12 +34,15 @@ public class Reflection {
 		}
 	}
 	
+	
 	public void getFields() {
 		Field[] fields = cls.getFields(); //Get the fields / attributes
 		//Loop over the Fields and print the name of each
 		for(Field f : fields){
-
-			System.out.println("Field Name: " + f.getName());
+			 System.out.println("Field Name = " + f.getName());
+	         System.out.println("Type = " + f.getType());
+	         int mod = f.getModifiers();
+	         System.out.println("Modifiers = " + Modifier.toString(mod));
 		}
 	}
 }
