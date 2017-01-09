@@ -44,8 +44,10 @@ public static void getJar(){
 					Class cls = Class.forName(name, false, cl);
 					Metrics.put(name, m);
 					m.setName(name);
-					System.out.println(Metrics);
+					//System.out.println(Metrics);
 					getClassDetails(cls);
+					Reflection ref = new Reflection(cls);
+				
 				} catch (ClassNotFoundException e) {
 					System.out.println("Couldn't find class "); 
 				} 
