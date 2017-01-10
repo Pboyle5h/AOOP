@@ -8,12 +8,12 @@ import java.net.URLClassLoader;
 public class Reflection {
 	private Class cls;
 	ReceiveJar rj = new ReceiveJar();
-	int outdegree, inDegree= 0;
+	int outdegree= 0;
 	public Reflection(Class cls){
 	      super();
 	      this.cls = cls;
-	      calculateBasicMetric();
-	     rj.Metrics.get(cls.getName()).setOutDegree(outdegree);
+	      calculateMetric();
+	      rj.Metrics.get(cls.getName()).setOutDegree(outdegree);
 
 	   }	 
 	
@@ -28,17 +28,17 @@ public class Reflection {
 				System.out.println("Method Return Type: " + m.getReturnType());
 				System.out.println("DeclaringClass = " + m.getDeclaringClass());
 
-	            Class methodReturnType = m.getReturnType(); 
+	            Class returnType = m.getReturnType(); 
 	            
 
-	            if(rj.Metrics.containsKey(methodReturnType.getName())){
+	            if(rj.Metrics.containsKey(returnType.getName())){
 
 	                
 	                outdegree++;
 
 	            
-	                metric bm = rj.Metrics.get(methodReturnType.getName());
-	                bm.setInDegree(bm.getInDegree() + 1);
+	                metric met = rj.Metrics.get(returnType.getName());
+	                met.setInDegree(met.getInDegree() + 1);
 	            }
 
 	            methodParams = m.getParameterTypes(); 
@@ -51,8 +51,8 @@ public class Reflection {
 	                    outdegree++;
 
 	                    
-	                    metric bm = rj.Metrics.get(mp.getName());
-	                    bm.setInDegree(bm.getInDegree() + 1);
+	                    metric met = rj.Metrics.get(mp.getName());
+	                    met.setInDegree(met.getInDegree() + 1);
 
 	                } 
 	            } 
@@ -61,7 +61,7 @@ public class Reflection {
 	
 	
 	public void getFields(Class cls) {
-		 Field[] fields = cls.getFields(); //Get the fields / attributes
+		 Field[] fields = cls.getFields(); 
 
 	        for(Field f : fields){
 	        	 System.out.println("Field Name = " + f.getName());
@@ -75,8 +75,8 @@ public class Reflection {
 	                outdegree++;
 
 	         
-	                metric m = rj.Metrics.get(f.getName());
-	                m.setInDegree(m.getInDegree() + 1);
+	                metric met = rj.Metrics.get(f.getName());
+	                met.setInDegree(met.getInDegree() + 1);
 
 	            } 
 	        } 
@@ -93,42 +93,38 @@ public class Reflection {
                 outdegree++;
 
                 
-                metric m = rj.Metrics.get(i.getName());
-                m.setInDegree(m.getInDegree() + 1);
+                metric met = rj.Metrics.get(i.getName());
+                met.setInDegree(met.getInDegree() + 1);
 
-                //System.out.println("Implements Interface: " + i.getName());
+                
 
-            } // if
-            //System.out.println("Implements Interface: " + i.getName());
+            } 
+      
 
-        } // foreach
+        } 
 	}
 	 public void getConstructors(Class cls){
 
-	        Constructor[] cons = cls.getConstructors(); //Get the set of constructors
-	        Class[] constructorParams;
+	        Constructor[] cons = cls.getConstructors();
+	        Class[] consParams;
 
-	        // for each constructor, get it's parameters
+	        
 	        for(Constructor c : cons){
 
-	            //System.out.println("Contructor: " + c.getName());
-	            constructorParams = c.getParameterTypes(); //Get the parameters
-	            for(Class param : constructorParams){
+	            
+	        	consParams = c.getParameterTypes(); 
+	            for(Class param : consParams){
 
-	                if(rj.Metrics.containsKey(param.getName())){
-
-	                    // increment outdegree
+	                if(rj.Metrics.containsKey(param.getName())){	                    
 	                    outdegree++;
+	              
+	                    metric met = rj.Metrics.get(param.getName());
+	                    met.setInDegree(met.getInDegree() + 1);
 
-	                    // increment indegree for other class
-	                    metric m = rj.Metrics.get(param.getName());
-	                    m.setInDegree(m.getInDegree() + 1);
-
-	                } // if
-
-	                //System.out.println("Constructor Param: " + param.getName());
-	            } // foreach
-	        } // foreach
+	                } 
+	                
+	            } 
+	        } 
 
 	   }
 
@@ -138,12 +134,12 @@ public class Reflection {
 	}
 	
 	 
-	 public void calculateBasicMetric(){
+	 public void calculateMetric(){
 
 	        try {
 
 	            
-	            File file = new File("src/TestJar.jar");
+	            File file = new File("src/string-service.jar");
 
 	            
 	            URL url = file.toURI().toURL();

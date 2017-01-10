@@ -23,7 +23,17 @@ public class metric {
 	public void setOutDegree(int outDegree) {
 		this.outDegree = outDegree;
 	}
-	
+	public double getStability(){
+
+        double stability = 0.0;
+
+        if(getOutDegree() > 0){
+
+        	stability  = ((double) getOutDegree() / ((double)getInDegree() +(double)getOutDegree()));
+        }
+
+        return stability;
+    }
 	
     
 }
