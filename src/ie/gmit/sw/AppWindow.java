@@ -56,9 +56,7 @@ public class AppWindow {
             public void actionPerformed(ActionEvent evt) {
             	
             	ReceiveJar rj = new ReceiveJar(txtFileName.getText());
-            	AppSummary as =  new AppSummary(frame, true);
-            	
-        		
+            	AppSummary as =  new AppSummary(frame, true);        	
             	as.show();
 			}
         });
@@ -97,7 +95,5 @@ public class AppWindow {
 		frame.setVisible(true);
 	}
 	
-//	public static void main(String[] args) {
-//		new AppWindow();
-//	}
+
 }

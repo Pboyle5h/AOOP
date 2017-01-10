@@ -3,7 +3,7 @@ package ie.gmit.sw;
 import javax.swing.table.*;
 public class TypeSummaryTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 777L;
-	private String[] cols = {"Col 1", "Col 2", "Col 3", "Col 4"};
+	private String[] cols = {"Class Name", "Out Degree", "In Degree", "Stability"};
 	public static Object[][] data = new Object[ReceiveJar.Metrics.size()][4];
 	
 	public static Object[][] getMetricData(){
@@ -23,15 +23,14 @@ public class TypeSummaryTableModel extends AbstractTableModel{
 	public TypeSummaryTableModel(){
 	    super();
 
-	    // load data
-
+	  
     }
 
     public void setTableData(Object[][] data){
 
 	    this.data = data;
 
-    } // setTableData()
+    } 
 	public int getColumnCount() {
         return cols.length;
     }

@@ -137,7 +137,7 @@ public class Reflection {
 	
 	 
 	 public void calculateMetric(){
-		 AppWindow ap = new AppWindow();
+		 
 	        try {
 
 	            
