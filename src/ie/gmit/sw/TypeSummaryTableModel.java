@@ -18,6 +18,19 @@ public class TypeSummaryTableModel extends AbstractTableModel{
         return data;
 
     } 
+	
+	public TypeSummaryTableModel(){
+	    super();
+
+	    // load data
+
+    }
+
+    public void setTableData(Object[][] data){
+
+	    this.data = data;
+
+    } // setTableData()
 	public int getColumnCount() {
         return cols.length;
     }

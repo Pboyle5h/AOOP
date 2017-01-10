@@ -24,14 +24,14 @@ public static void getJar(){
 	metric m = new metric();
 	 JarInputStream in;
 		try {			
-			File file  = new File("src/string-service.jar");
+			File file  = new File("src/TestJar.jar");
 		
 			 URL url = file.toURI().toURL();
 	         URL[] urls = new URL[]{url};
 	            
 	         ClassLoader cl = new URLClassLoader(urls);
 	         
-	     	in = new JarInputStream(new FileInputStream(new File("src/string-service.jar")));
+	     	in = new JarInputStream(new FileInputStream(new File("src/TestJar.jar")));
 			JarEntry next = in.getNextJarEntry();
 			while (next != null) {
 			 if (next.getName().endsWith(".class")) {
@@ -42,11 +42,13 @@ public static void getJar(){
 			
 				try {
 					Class cls = Class.forName(name, false, cl);
-					Metrics.put(name, m);
-					m.setName(name);
-					//System.out.println(Metrics);
 					
+					Metrics.put(name, new metric());
+					Metrics.get(name).setName(name);
 					Reflection ref = new Reflection(cls);
+			
+					
+					
 				
 				} catch (ClassNotFoundException e) {
 					System.out.println("Couldn't find class "); 
