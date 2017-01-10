@@ -54,10 +54,11 @@ public class AppWindow {
 		JButton btnDialog = new JButton("Calculate Stability"); //Create Quit button
         btnDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	
+            	if(txtFileName.getText().endsWith(".jar")){
             	ReceiveJar rj = new ReceiveJar(txtFileName.getText());
             	AppSummary as =  new AppSummary(frame, true);        	
             	as.show();
+            	}
 			}
         });
 		
