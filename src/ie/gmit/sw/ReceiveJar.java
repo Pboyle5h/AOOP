@@ -42,6 +42,7 @@ public static void getJar(){
 			
 				try {
 					Class cls = Class.forName(name, false, cl);
+					//if statement to block out standard classes
 					if(name.contains("org.")){
 					
 					}
