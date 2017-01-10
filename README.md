@@ -1,6 +1,10 @@
+# Measuring Stability Using the Reflection API
+  Pauric Boyle: [Pauric's Github](https://github.com/Pboyle5h/AOOP)  
+
 Student ID: G00316554
+
 Student Name: Pauric Boyle 
-Project: Measuring Stability Using the Reflection API
+
 B.Sc. Software Development - Advanced Object Oriented Software Development
 
 In this project we were required to create a Java application that uses reflection to analyse an arbitrary Java
@@ -12,4 +16,4 @@ I = ce/ce + ca.
 Afferent Couplings =Ca
 Efferent Couplings =Ce
 
-GIthub Link: https://github.com/Pboyle5h/AOOP
+GIthub Link: 
