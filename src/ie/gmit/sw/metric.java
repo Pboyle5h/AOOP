@@ -28,7 +28,7 @@ public class metric {
         double stability = 0.0;
 
         if(getOutDegree() > 0){
-
+        	
         	stability  = ((double) getOutDegree() / ((double)getInDegree() +(double)getOutDegree()));
         }
 

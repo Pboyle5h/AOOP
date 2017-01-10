@@ -9,8 +9,7 @@ import java.util.jar.JarInputStream;
 public class Runner {
 
 	public static void main(String[] args) {
-		ReceiveJar rj = new ReceiveJar();
-		rj.getJar();
+		
 		new AppWindow();
 	}
 	

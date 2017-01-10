@@ -7,13 +7,15 @@ import java.net.URLClassLoader;
 
 public class Reflection {
 	private Class cls;
-	ReceiveJar rj = new ReceiveJar();
+	
+	private String name;
 	int outdegree= 0;
-	public Reflection(Class cls){
+	public Reflection(Class cls, String path){
 	      super();
 	      this.cls = cls;
+	      this.name=path;
 	      calculateMetric();
-	      rj.Metrics.get(cls.getName()).setOutDegree(outdegree);
+	      ReceiveJar.Metrics.get(cls.getName()).setOutDegree(outdegree);
 
 	   }	 
 	
@@ -31,13 +33,13 @@ public class Reflection {
 	            Class returnType = m.getReturnType(); 
 	            
 
-	            if(rj.Metrics.containsKey(returnType.getName())){
+	            if(ReceiveJar.Metrics.containsKey(returnType.getName())){
 
 	                
 	                outdegree++;
 
 	            
-	                metric met = rj.Metrics.get(returnType.getName());
+	                metric met = ReceiveJar.Metrics.get(returnType.getName());
 	                met.setInDegree(met.getInDegree() + 1);
 	            }
 
@@ -46,12 +48,12 @@ public class Reflection {
 
 	            	System.out.println("Method Parameter: " + mp.getName());
 
-	                if(rj.Metrics.containsKey(mp.getName())){
+	                if(ReceiveJar.Metrics.containsKey(mp.getName())){
 
 	                    outdegree++;
 
 	                    
-	                    metric met = rj.Metrics.get(mp.getName());
+	                    metric met = ReceiveJar.Metrics.get(mp.getName());
 	                    met.setInDegree(met.getInDegree() + 1);
 
 	                } 
@@ -69,13 +71,13 @@ public class Reflection {
 		         int mod = f.getModifiers();
 		         System.out.println("Modifiers = " + Modifier.toString(mod));;
 
-	            if(rj.Metrics.containsKey(f.getName())){
+	            if(ReceiveJar.Metrics.containsKey(f.getName())){
 
 	                
 	                outdegree++;
 
 	         
-	                metric met = rj.Metrics.get(f.getName());
+	                metric met = ReceiveJar.Metrics.get(f.getName());
 	                met.setInDegree(met.getInDegree() + 1);
 
 	            } 
@@ -87,13 +89,13 @@ public class Reflection {
         
         for(Class i : interfaces){
 
-            if(rj.Metrics.containsKey(i.getName())) {
+            if(ReceiveJar.Metrics.containsKey(i.getName())) {
 
                
                 outdegree++;
 
                 
-                metric met = rj.Metrics.get(i.getName());
+                metric met = ReceiveJar.Metrics.get(i.getName());
                 met.setInDegree(met.getInDegree() + 1);
 
                 
@@ -115,10 +117,10 @@ public class Reflection {
 	        	consParams = c.getParameterTypes(); 
 	            for(Class param : consParams){
 
-	                if(rj.Metrics.containsKey(param.getName())){	                    
+	                if(ReceiveJar.Metrics.containsKey(param.getName())){	                    
 	                    outdegree++;
 	              
-	                    metric met = rj.Metrics.get(param.getName());
+	                    metric met = ReceiveJar.Metrics.get(param.getName());
 	                    met.setInDegree(met.getInDegree() + 1);
 
 	                } 
@@ -135,11 +137,11 @@ public class Reflection {
 	
 	 
 	 public void calculateMetric(){
-
+		 AppWindow ap = new AppWindow();
 	        try {
 
 	            
-	            File file = new File("src/string-service.jar");
+	            File file = new File(name);
 
 	            
 	            URL url = file.toURI().toURL();
@@ -149,7 +151,7 @@ public class Reflection {
 	            ClassLoader cl = new URLClassLoader(urls);
 
 	           
-	            for (String className : rj.Metrics.keySet()) {
+	            for (String className : ReceiveJar.Metrics.keySet()) {
 
 	                
 	                Class cls = Class.forName(className, false, cl);

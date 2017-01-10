@@ -16,22 +16,27 @@ import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 
 public class ReceiveJar {
-
+	private String pathName;
 
 public static HashMap<String, metric> Metrics = new HashMap<>();
 
-public static void getJar(){
+public ReceiveJar(String path) {
+	 this.pathName = path;
+	 getJar();
+}
+
+public void getJar(){
 	metric m = new metric();
-	 JarInputStream in;
+
 		try {			
-			File file  = new File("src/string-service.jar");
+			File file  = new File(pathName);
 		
 			 URL url = file.toURI().toURL();
 	         URL[] urls = new URL[]{url};
 	            
 	         ClassLoader cl = new URLClassLoader(urls);
 	         
-	     	in = new JarInputStream(new FileInputStream(new File("src/string-service.jar")));
+	        JarInputStream in = new JarInputStream(new FileInputStream(pathName));
 			JarEntry next = in.getNextJarEntry();
 			while (next != null) {
 			 if (next.getName().endsWith(".class")) {
@@ -49,7 +54,7 @@ public static void getJar(){
 					else{
 						Metrics.put(name, new metric());
 						Metrics.get(name).setName(name);
-						Reflection ref = new Reflection(cls);
+						Reflection ref = new Reflection(cls , pathName);
 					}
 					
 				

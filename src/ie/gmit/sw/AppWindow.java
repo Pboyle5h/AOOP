@@ -9,6 +9,7 @@ import java.io.File;
 
 public class AppWindow {
 	private JFrame frame;
+
 	
 	public AppWindow(){
 		//Create a window for the application
@@ -32,7 +33,7 @@ public class AppWindow {
 		txtFileName.setMinimumSize(new java.awt.Dimension(100, 30));
 		
 		JButton btnChooseFile = new JButton("Browse...");
-		btnChooseFile.setToolTipText("Select File to Encode");
+		btnChooseFile.setToolTipText("Select JAR File ");
         btnChooseFile.setPreferredSize(new java.awt.Dimension(90, 30));
         btnChooseFile.setMaximumSize(new java.awt.Dimension(90, 30));
         btnChooseFile.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -50,10 +51,14 @@ public class AppWindow {
 			}
         });
 		
-		JButton btnDialog = new JButton("Show Dialog"); //Create Quit button
+		JButton btnDialog = new JButton("Calculate Stability"); //Create Quit button
         btnDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+            	
+            	ReceiveJar rj = new ReceiveJar(txtFileName.getText());
             	AppSummary as =  new AppSummary(frame, true);
+            	
+        		
             	as.show();
 			}
         });
@@ -92,7 +97,7 @@ public class AppWindow {
 		frame.setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		new AppWindow();
-	}
+//	public static void main(String[] args) {
+//		new AppWindow();
+//	}
 }
