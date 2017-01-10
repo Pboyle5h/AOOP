@@ -21,7 +21,7 @@ public class AppWindow {
 		
         //The file panel will contain the file chooser
         JPanel top = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        top.setBorder(new javax.swing.border.TitledBorder("Select File to Encode"));
+        top.setBorder(new javax.swing.border.TitledBorder("Select JAR file"));
         top.setPreferredSize(new java.awt.Dimension(500, 100));
         top.setMaximumSize(new java.awt.Dimension(500, 100));
         top.setMinimumSize(new java.awt.Dimension(500, 100));
@@ -58,6 +58,9 @@ public class AppWindow {
             	ReceiveJar rj = new ReceiveJar(txtFileName.getText());
             	AppSummary as =  new AppSummary(frame, true);        	
             	as.show();
+            	}
+            	else{
+            		txtFileName.setText("MUST BE A JAR FILE");
             	}
 			}
         });
